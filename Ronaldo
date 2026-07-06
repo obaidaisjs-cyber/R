@@ -1,0 +1,19 @@
+name: Find Correct Defconfig
+
+on:
+  workflow_dispatch:
+
+jobs:
+  find:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone Source
+        run: |
+          git clone --depth 1 -b redwood-s-oss https://github.com/MiCode/Xiaomi_Kernel_OpenSource.git kernel
+
+      - name: List all arm64 configs
+        run: |
+          echo "=== كل الملفات داخل arch/arm64/configs ==="
+          find kernel/arch/arm64/configs -type f
+          echo "=== لو فيه مجلد vendor ==="
+          find kernel/arch/arm64/configs/vendor -type f 2>/dev/null
